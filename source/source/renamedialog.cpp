@@ -28,6 +28,7 @@ ui(new Ui::RenameDialog)
 	flags |= Qt::WindowMinMaxButtonsHint;
 	setWindowFlags(flags);
 	setWindowIcon(QIcon(":rename.png"));
+	showMaximized();
 
 	connect(ui->btnPathSelect, SIGNAL(clicked()), this, SLOT(onClkBtnPathSelect()));
 	connect(ui->btnScan, SIGNAL(clicked()), this, SLOT(onClkBtnScan()));
@@ -140,8 +141,8 @@ void RenameDialog::LoadSetting()
 	}
 
 	QStringList lstPre;
-	lstPre << "*.cpp;*.cxx;*.h;*.hxx;*.pro;*.ui"
-		<< "*.sln;*.vcxproj.filters;*.vcxproj;*.rc;*.def;*.rc2"
+	lstPre << "*.cpp;*.cxx;*.h;*.hxx;*.pro;*.ui;*.pri"
+		<< "*.sln;*.vcxproj.filters;*.vcxproj;*.props;*.rc;*.def;*.rc2"
 		<< "Makefile;Makefile.vc";
 	
 	nCount = lstPre.count();
@@ -600,7 +601,10 @@ void RenameDialog::onClkBtnExecute()
 
 void RenameDialog::onClkBtnHelp()
 {
-	QMessageBox::about(NULL, tr("Help"), "Rename V0.2.0");
+	QMessageBox::about(NULL, tr("Help"), 
+	"Rename V0.2.1 \n"
+	"by WtPlus.cn"
+	);
 }
 
 void RenameDialog::Item2Data()
@@ -666,7 +670,9 @@ void RenameDialog::ReplaceContent(QString strFile)
 
 	QString strLine;
 	QTextStream stream(&fp);
-	if (fileInfo.completeSuffix() == "vcxproj.filters")
+	if (fileInfo.completeSuffix() == "vcxproj.filters"
+		|| fileInfo.completeSuffix() == "vcxproj"
+		|| fileInfo.completeSuffix() == "props")
 	{
 		stream.setCodec("UTF-8");
 		tmpStream.setCodec("UTF-8");
