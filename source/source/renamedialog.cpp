@@ -55,42 +55,49 @@ void RenameDialog::Init()
 	m_item[nCount].leSrc = ui->leDirNameSrc;
 	m_item[nCount].leTar = ui->leDirNameTar;
 	m_item[nCount].ckCase = ui->ckDirNameCase;
+	m_item[nCount].ckUpLow = ui->ckDirNameUpLow;
 	nCount++;
 
 	m_item[nCount].gbUse = ui->gbFileRename;
 	m_item[nCount].leSrc = ui->leFileNameSrc;
 	m_item[nCount].leTar = ui->leFileNameTar;
 	m_item[nCount].ckCase = ui->ckFileNameCase;
+	m_item[nCount].ckUpLow = ui->ckFileNameUpLow;
 	nCount++;
 
 	m_item[nCount].gbUse = ui->gbContent1;
 	m_item[nCount].leSrc = ui->leContentSrc1;
 	m_item[nCount].leTar = ui->leContentTar1;
 	m_item[nCount].ckCase = ui->ckContentCase1;
+	m_item[nCount].ckUpLow = ui->ckContentUpLow1;
 	nCount++;
 
 	m_item[nCount].gbUse = ui->gbContent2;
 	m_item[nCount].leSrc = ui->leContentSrc2;
 	m_item[nCount].leTar = ui->leContentTar2;
 	m_item[nCount].ckCase = ui->ckContentCase2;
+	m_item[nCount].ckUpLow = ui->ckContentUpLow2;
 	nCount++;
 
 	m_item[nCount].gbUse = ui->gbContent3;
 	m_item[nCount].leSrc = ui->leContentSrc3;
 	m_item[nCount].leTar = ui->leContentTar3;
 	m_item[nCount].ckCase = ui->ckContentCase3;
+	m_item[nCount].ckUpLow = ui->ckContentUpLow3;
 	nCount++;
 
 	m_item[nCount].gbUse = ui->gbContent4;
 	m_item[nCount].leSrc = ui->leContentSrc4;
 	m_item[nCount].leTar = ui->leContentTar4;
 	m_item[nCount].ckCase = ui->ckContentCase4;
+	m_item[nCount].ckUpLow = ui->ckContentUpLow4;
 	nCount++;
 
 	m_item[nCount].gbUse = ui->gbContent5;
 	m_item[nCount].leSrc = ui->leContentSrc5;
 	m_item[nCount].leTar = ui->leContentTar5;
 	m_item[nCount].ckCase = ui->ckContentCase5;
+	m_item[nCount].ckUpLow = ui->ckContentUpLow5;
 	nCount++;
 
 	m_pDRData = m_data + 0;
@@ -99,6 +106,7 @@ void RenameDialog::Init()
 	for (int i = 0; i < RENAME_ITEM_NUM; i++)
 	{
 		connect(m_item[i].gbUse, SIGNAL(clicked()), this, SLOT(onClkGbUse()));
+		connect(m_item[i].ckCase, SIGNAL(clicked()), this, SLOT(onClkCkCase()));
 	}
 	
 	QStringList lst;
@@ -128,6 +136,7 @@ void RenameDialog::LoadSetting()
 		m_item[i].leSrc->setText(settings.value(QString("Item%1_Src").arg(i)).toString());
 		m_item[i].leTar->setText(settings.value(QString("Item%1_Tar").arg(i)).toString());
 		m_item[i].ckCase->setChecked(settings.value(QString("Item%1_Case").arg(i)).toBool());
+		m_item[i].ckUpLow->setChecked(settings.value(QString("Item%1_UpLow").arg(i)).toBool());
 	}
 
 	m_suffixList = settings.value("Suffix").toStringList();
@@ -167,6 +176,7 @@ void RenameDialog::SaveSetting()
 		settings.setValue(QString("Item%1_Src").arg(i), m_item[i].leSrc->text());
 		settings.setValue(QString("Item%1_Tar").arg(i), m_item[i].leTar->text());
 		settings.setValue(QString("Item%1_Case").arg(i), m_item[i].ckCase->isChecked());
+		settings.setValue(QString("Item%1_UpLow").arg(i), m_item[i].ckUpLow->isChecked());
 	}
 
 	settings.setValue(QString("Suffix"), m_suffixList);
@@ -355,9 +365,8 @@ void RenameDialog::ScanDir(QString strDir)
 	foreach(dirInfo, lstDir)
 	{
 		QString strName = dirInfo.fileName();
-		if (strName.contains(m_pDRData->strSrc, m_pDRData->bCase ? Qt::CaseSensitive : Qt::CaseInsensitive))
+		if (strName.contains(m_pDRData->strSrc, (m_pDRData->bCase&&(!m_pDRData->bUpLow)) ? Qt::CaseSensitive : Qt::CaseInsensitive))
 		{
-
 			int nCount = ui->tableFile->rowCount();
 			ui->tableFile->insertRow(nCount);
 
@@ -369,6 +378,11 @@ void RenameDialog::ScanDir(QString strDir)
 			ui->tableFile->setItem(nCount, TABLE_COL_RENAME, item);
 
 			strName = strName.replace(m_pDRData->strSrc, m_pDRData->strTar, m_pDRData->bCase ? Qt::CaseSensitive : Qt::CaseInsensitive);
+			if(m_pDRData->bCase && m_pDRData->bUpLow)
+			{
+				strName = strName.replace(m_pDRData->strSrc.toUpper(), m_pDRData->strTar.toUpper(), Qt::CaseSensitive);
+				strName = strName.replace(m_pDRData->strSrc.toLower(), m_pDRData->strTar.toLower(), Qt::CaseSensitive);				
+			}
 
 			item = new QTableWidgetItem(QString("%1/%2").arg(dirInfo.absolutePath()).arg(strName));
 			ui->tableFile->setItem(nCount, TABLE_COL_NEWNAME, item);
@@ -405,7 +419,7 @@ void RenameDialog::ScanFile(const QFileInfo& fileInfo)
 	if (m_pFRData->bUse)
 	{
 		QString strCbName = fileInfo.completeBaseName();
-		if (strCbName.contains(m_pFRData->strSrc, m_pFRData->bCase ? Qt::CaseSensitive : Qt::CaseInsensitive))
+		if (strCbName.contains(m_pFRData->strSrc, (m_pFRData->bCase&&(!m_pFRData->bUpLow)) ? Qt::CaseSensitive : Qt::CaseInsensitive))
 		{
 			bRename = true;
 
@@ -420,6 +434,11 @@ void RenameDialog::ScanFile(const QFileInfo& fileInfo)
 			ui->tableFile->setItem(nCount, TABLE_COL_RENAME, item);
 
 			strCbName = strCbName.replace(m_pFRData->strSrc, m_pFRData->strTar, m_pFRData->bCase ? Qt::CaseSensitive : Qt::CaseInsensitive);
+			if(m_pFRData->bCase && m_pFRData->bUpLow)
+			{
+				strCbName = strCbName.replace(m_pFRData->strSrc.toUpper(), m_pFRData->strTar.toUpper(), Qt::CaseSensitive);
+				strCbName = strCbName.replace(m_pFRData->strSrc.toLower(), m_pFRData->strTar.toLower(), Qt::CaseSensitive);				
+			}
 
 			item = new QTableWidgetItem(QString("%1/%2.%3").arg(fileInfo.absolutePath()).arg(strCbName).arg(fileInfo.suffix()));
 			ui->tableFile->setItem(nCount, TABLE_COL_NEWNAME, item);
@@ -444,7 +463,7 @@ void RenameDialog::ScanFile(const QFileInfo& fileInfo)
 		{
 			if (m_data[i].bUse)
 			{
-				if (strLine.contains(m_data[i].strSrc, m_data[i].bCase ? Qt::CaseSensitive : Qt::CaseInsensitive))
+				if (strLine.contains(m_data[i].strSrc, (m_data[i].bCase&&(!m_data[i].bUpLow)) ? Qt::CaseSensitive : Qt::CaseInsensitive))
 				{
 					bFind = true;
 					break;
@@ -613,6 +632,7 @@ void RenameDialog::Item2Data()
 	{
 		m_data[i].bUse = m_item[i].gbUse->isChecked();
 		m_data[i].bCase = m_item[i].ckCase->isChecked();
+		m_data[i].bUpLow = m_item[i].ckUpLow->isChecked();
 		m_data[i].strSrc = m_item[i].leSrc->text();
 		m_data[i].strTar = m_item[i].leTar->text();
 
@@ -686,6 +706,12 @@ void RenameDialog::ReplaceContent(QString strFile)
 			if (m_data[i].bUse)
 			{
 				strLine = strLine.replace(m_data[i].strSrc, m_data[i].strTar, m_data[i].bCase ? Qt::CaseSensitive : Qt::CaseInsensitive);
+				
+				if(m_data[i].bCase && m_data[i].bUpLow)
+				{
+					strLine = strLine.replace(m_data[i].strSrc.toUpper(), m_data[i].strTar.toUpper(), Qt::CaseSensitive);
+					strLine = strLine.replace(m_data[i].strSrc.toLower(), m_data[i].strTar.toLower(), Qt::CaseSensitive);
+				}
 			}
 		}
 		tmpStream << strLine;
@@ -721,5 +747,21 @@ void RenameDialog::onClkGbUse()
 	else
 	{
 		m_item[0].gbUse->setChecked(false);
+	}
+}
+void RenameDialog::onClkCkCase()
+{
+	QCheckBox* ckCase = (QCheckBox*)sender();
+	if (!ckCase->isChecked())
+	{
+		return;
+	}
+	
+	for (int i = 0; i < RENAME_ITEM_NUM; i++)
+	{
+		if(sender() == m_item[i].ckCase)
+		{
+			m_item[i].ckUpLow->setChecked(false);
+		}
 	}
 }

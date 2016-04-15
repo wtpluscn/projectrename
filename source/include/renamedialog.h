@@ -20,7 +20,7 @@ typedef struct
 	QLineEdit* leSrc;
 	QLineEdit* leTar;
 	QCheckBox* ckCase;
-	QCheckBox* ckDir;
+	QCheckBox* ckUpLow;
 }RenameItem_t;
 
 typedef struct
@@ -29,6 +29,7 @@ typedef struct
 	QString strSrc;
 	QString strTar;
 	bool bCase;
+	bool bUpLow;
 }RenameData_t;
 
 #define RENAME_CONTENT_NUM	5
@@ -71,6 +72,7 @@ public slots:
 	void onClkBtnReplaceSelectAll();
 	void onClkBtnReplaceReverse();
 	void onClkGbUse();
+	void onClkCkCase();
 private:
 	void CalcDir(QString strDir);
 	void CalcFile(QString strDir);

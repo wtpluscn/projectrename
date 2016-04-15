@@ -88,7 +88,7 @@
           <property name="checked">
            <bool>true</bool>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
             <widget class="QPushButton" name="pushButton_3">
              <property name="minimumSize">
@@ -117,11 +117,22 @@
               <widget class="QLineEdit" name="leDirNameTar"/>
              </item>
              <item>
-              <widget class="QCheckBox" name="ckDirNameCase">
-               <property name="text">
-                <string>CaseSensitive</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QCheckBox" name="ckDirNameCase">
+                 <property name="text">
+                  <string>CaseSensitive</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="ckDirNameUpLow">
+                 <property name="text">
+                  <string>Upper And Lower</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -139,7 +150,7 @@
           <property name="checked">
            <bool>true</bool>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
             <widget class="QPushButton" name="pushButton_2">
              <property name="minimumSize">
@@ -168,11 +179,22 @@
               <widget class="QLineEdit" name="leFileNameTar"/>
              </item>
              <item>
-              <widget class="QCheckBox" name="ckFileNameCase">
-               <property name="text">
-                <string>CaseSensitive</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QCheckBox" name="ckFileNameCase">
+                 <property name="text">
+                  <string>CaseSensitive</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="ckFileNameUpLow">
+                 <property name="text">
+                  <string>Upper and Lower</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -211,7 +233,7 @@
             </widget>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_14">
+            <layout class="QVBoxLayout" name="verticalLayout_6">
              <item>
               <widget class="QLineEdit" name="leContentSrc1"/>
              </item>
@@ -219,11 +241,22 @@
               <widget class="QLineEdit" name="leContentTar1"/>
              </item>
              <item>
-              <widget class="QCheckBox" name="ckContentCase1">
-               <property name="text">
-                <string>CaseSensitive</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QCheckBox" name="ckContentCase1">
+                 <property name="text">
+                  <string>CaseSensitive</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="ckContentUpLow1">
+                 <property name="text">
+                  <string>Upper and Lower</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -241,7 +274,7 @@
           <property name="checked">
            <bool>true</bool>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <layout class="QHBoxLayout" name="horizontalLayout_15">
            <item>
             <widget class="QPushButton" name="pushButton_9">
              <property name="minimumSize">
@@ -262,7 +295,7 @@
             </widget>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_15">
+            <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
               <widget class="QLineEdit" name="leContentSrc2"/>
              </item>
@@ -270,11 +303,22 @@
               <widget class="QLineEdit" name="leContentTar2"/>
              </item>
              <item>
-              <widget class="QCheckBox" name="ckContentCase2">
-               <property name="text">
-                <string>CaseSensitive</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <widget class="QCheckBox" name="ckContentCase2">
+                 <property name="text">
+                  <string>CaseSensitive</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="ckContentUpLow2">
+                 <property name="text">
+                  <string>Upper and Lower</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -292,7 +336,7 @@
           <property name="checked">
            <bool>true</bool>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <layout class="QHBoxLayout" name="horizontalLayout_16">
            <item>
             <widget class="QPushButton" name="pushButton_10">
              <property name="minimumSize">
@@ -313,7 +357,7 @@
             </widget>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_16">
+            <layout class="QVBoxLayout" name="verticalLayout_8">
              <item>
               <widget class="QLineEdit" name="leContentSrc3"/>
              </item>
@@ -321,11 +365,22 @@
               <widget class="QLineEdit" name="leContentTar3"/>
              </item>
              <item>
-              <widget class="QCheckBox" name="ckContentCase3">
-               <property name="text">
-                <string>CaseSensitive</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <item>
+                <widget class="QCheckBox" name="ckContentCase3">
+                 <property name="text">
+                  <string>CaseSensitive</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="ckContentUpLow3">
+                 <property name="text">
+                  <string>Upper and Lower</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -343,7 +398,7 @@
           <property name="checked">
            <bool>true</bool>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <layout class="QHBoxLayout" name="horizontalLayout_17">
            <item>
             <widget class="QPushButton" name="pushButton_11">
              <property name="minimumSize">
@@ -364,7 +419,7 @@
             </widget>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_17">
+            <layout class="QVBoxLayout" name="verticalLayout_9">
              <item>
               <widget class="QLineEdit" name="leContentSrc4"/>
              </item>
@@ -372,11 +427,22 @@
               <widget class="QLineEdit" name="leContentTar4"/>
              </item>
              <item>
-              <widget class="QCheckBox" name="ckContentCase4">
-               <property name="text">
-                <string>CaseSensitive</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QCheckBox" name="ckContentCase4">
+                 <property name="text">
+                  <string>CaseSensitive</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="ckContentUpLow4">
+                 <property name="text">
+                  <string>Upper and Lower</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -394,7 +460,7 @@
           <property name="checked">
            <bool>true</bool>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <layout class="QHBoxLayout" name="horizontalLayout_18">
            <item>
             <widget class="QPushButton" name="pushButton_12">
              <property name="minimumSize">
@@ -415,7 +481,7 @@
             </widget>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_18">
+            <layout class="QVBoxLayout" name="verticalLayout_10">
              <item>
               <widget class="QLineEdit" name="leContentSrc5"/>
              </item>
@@ -423,11 +489,22 @@
               <widget class="QLineEdit" name="leContentTar5"/>
              </item>
              <item>
-              <widget class="QCheckBox" name="ckContentCase5">
-               <property name="text">
-                <string>CaseSensitive</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <widget class="QCheckBox" name="ckContentCase5">
+                 <property name="text">
+                  <string>CaseSensitive</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="ckContentUpLow5">
+                 <property name="text">
+                  <string>Upper and Lower</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -578,10 +655,6 @@
   </layout>
   <zorder>groupBox</zorder>
   <zorder></zorder>
-  <zorder>groupBox_3</zorder>
-  <zorder>gbDirRename</zorder>
-  <zorder>groupBox_3</zorder>
-  <zorder>groupBox_3</zorder>
  </widget>
  <resources/>
  <connections/>
