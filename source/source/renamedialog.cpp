@@ -136,7 +136,14 @@ void RenameDialog::LoadSetting()
 		m_item[i].leSrc->setText(settings.value(QString("Item%1_Src").arg(i)).toString());
 		m_item[i].leTar->setText(settings.value(QString("Item%1_Tar").arg(i)).toString());
 		m_item[i].ckCase->setChecked(settings.value(QString("Item%1_Case").arg(i)).toBool());
-		m_item[i].ckUpLow->setChecked(settings.value(QString("Item%1_UpLow").arg(i)).toBool());
+		if(m_item[i].ckCase->isChecked())
+		{
+			m_item[i].ckUpLow->setChecked(settings.value(QString("Item%1_UpLow").arg(i)).toBool());			
+		}
+		else
+		{
+			m_item[i].ckUpLow->setEnabled(false);					
+		}
 	}
 
 	m_suffixList = settings.value("Suffix").toStringList();
@@ -752,16 +759,20 @@ void RenameDialog::onClkGbUse()
 void RenameDialog::onClkCkCase()
 {
 	QCheckBox* ckCase = (QCheckBox*)sender();
-	if (!ckCase->isChecked())
-	{
-		return;
-	}
 	
 	for (int i = 0; i < RENAME_ITEM_NUM; i++)
 	{
 		if(sender() == m_item[i].ckCase)
 		{
-			m_item[i].ckUpLow->setChecked(false);
+			if(ckCase->isChecked())
+			{
+				m_item[i].ckUpLow->setEnabled(true);
+			}
+			else
+			{
+				m_item[i].ckUpLow->setEnabled(false);
+				m_item[i].ckUpLow->setChecked(false);				
+			}
 		}
 	}
 }
