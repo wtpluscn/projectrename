@@ -699,7 +699,11 @@ void RenameDialog::ReplaceContent(QString strFile)
 	QTextStream stream(&fp);
 	if (fileInfo.completeSuffix() == "vcxproj.filters"
 		|| fileInfo.completeSuffix() == "vcxproj"
-		|| fileInfo.completeSuffix() == "props")
+		|| fileInfo.completeSuffix() == "props"
+        || fileInfo.completeSuffix() == "cpp"
+        || fileInfo.completeSuffix() == "h"
+        || fileInfo.completeSuffix() == "cxx"
+        || fileInfo.completeSuffix() == "hxx")
 	{
 		stream.setCodec("UTF-8");
 		tmpStream.setCodec("UTF-8");
