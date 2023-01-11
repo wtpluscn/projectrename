@@ -146,6 +146,7 @@ void RenameDialog::LoadSetting()
 		}
 	}
 
+	ui->ckCppUtf8->setChecked(settings.value("CppUtf8").toBool());
 	m_suffixList = settings.value("Suffix").toStringList();
 	int nCount = m_suffixList.count();
 	for (int i = nCount - 1; i >= 0; i--)
@@ -187,6 +188,7 @@ void RenameDialog::SaveSetting()
 	}
 
 	settings.setValue(QString("Suffix"), m_suffixList);
+	settings.setValue(QString("CppUtf8"), ui->ckCppUtf8->isChecked());
 }
 
 void RenameDialog::onClkBtnRenameSelectAll()
@@ -699,15 +701,23 @@ void RenameDialog::ReplaceContent(QString strFile)
 	QTextStream stream(&fp);
 	if (fileInfo.completeSuffix() == "vcxproj.filters"
 		|| fileInfo.completeSuffix() == "vcxproj"
-		|| fileInfo.completeSuffix() == "props"
-        || fileInfo.completeSuffix() == "cpp"
-        || fileInfo.completeSuffix() == "h"
-        || fileInfo.completeSuffix() == "cxx"
-        || fileInfo.completeSuffix() == "hxx")
+		|| fileInfo.completeSuffix() == "props")
 	{
 		stream.setCodec("UTF-8");
 		tmpStream.setCodec("UTF-8");
 		tmpStream.setGenerateByteOrderMark(true);
+	}
+	if (fileInfo.completeSuffix() == "cpp"
+        || fileInfo.completeSuffix() == "h"
+        || fileInfo.completeSuffix() == "cxx"
+        || fileInfo.completeSuffix() == "hxx")
+	{
+		if(ui->ckCppUtf8->isChecked())
+		{
+			stream.setCodec("UTF-8");
+			tmpStream.setCodec("UTF-8");
+			tmpStream.setGenerateByteOrderMark(true);
+		}
 	}
 	while (!stream.atEnd())
 	{

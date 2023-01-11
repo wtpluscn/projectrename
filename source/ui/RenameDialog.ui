@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1102</width>
-    <height>857</height>
+    <height>1046</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,6 +54,13 @@
         </property>
         <property name="editable">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="ckCppUtf8">
+        <property name="text">
+         <string>CPP utf-8</string>
         </property>
        </widget>
       </item>
